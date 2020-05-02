@@ -1957,33 +1957,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   data: function data() {
     return {
-      tasks: [{
-        id: 1,
-        title: "Task 1",
-        priority: "low"
-      }, {
-        id: 2,
-        title: "Task 2",
-        priority: "medium"
-      }, {
-        id: 3,
-        title: "Task 3",
-        priority: "high"
-      }]
+      tasks: [],
+      task: {
+        title: '',
+        priority: ''
+      }
     };
   },
   components: {
     TaskComponent: _Task__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    store: function store() {
+      console.log(this.task.title);
+    },
     getTasks: function getTasks() {
       var _this = this;
 
+      this.tasks = [];
       window.axios.get('/api/tasks').then(function (_ref) {
         var data = _ref.data;
         data.forEach(function (task) {
@@ -37684,7 +37694,81 @@ var render = function() {
           return _c("task-component", { key: task.id, attrs: { task: task } })
         }),
         _vm._v(" "),
-        _vm._m(1)
+        _c("tr", [
+          _c("td", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.task.title,
+                  expression: "task.title"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", id: "task" },
+              domProps: { value: _vm.task.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.task, "title", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("td", [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.task.priority,
+                    expression: "task.priority"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "select" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.task,
+                      "priority",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", [_vm._v("\n              low\n            ")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("\n              medium\n            ")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("\n              high\n            ")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("td", [
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", on: { click: _vm.store } },
+              [_vm._v("\n          ADD\n        ")]
+            )
+          ])
+        ])
       ],
       2
     )
@@ -37702,28 +37786,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("\n        Priority\n      ")]),
         _vm._v(" "),
         _c("th", [_vm._v("\n        Action\n      ")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", [_c("input", { attrs: { type: "text", id: "task" } })]),
-      _vm._v(" "),
-      _c("td", [
-        _c("select", { attrs: { id: "select" } }, [
-          _c("option", [_vm._v("\n              low\n            ")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("\n              medium\n            ")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("\n              high\n            ")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("td", [
-        _c("button", { staticClass: "btn btn-primary" }, [_vm._v("ADD")])
       ])
     ])
   }

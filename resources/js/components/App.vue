@@ -22,10 +22,19 @@
       </task-component>
       <tr>
         <td>
-          <input type="text" id="task" />
+          <input
+            class="form-control"
+            type="text"
+            id="task"
+            v-model="task.title"
+          />
         </td>
         <td>
-          <select id="select">
+          <select
+            class="form-control"
+            id="select"
+            v-model="task.priority"
+          >
               <option>
                 low
               </option>
@@ -38,7 +47,12 @@
           </select>
         </td>
         <td>
-          <button class="btn btn-primary">ADD</button>
+          <button
+            class="btn btn-primary"
+            @click="store"
+          >
+            ADD
+          </button>
         </td>
       </tr>
 
@@ -53,30 +67,22 @@
     name: "App",
     data() {
       return {
-        tasks: [
-          {
-            id: 1,
-            title: "Task 1",
-            priority: "low"
-          },
-          {
-            id: 2,
-            title: "Task 2",
-            priority: "medium"
-          },
-          {
-            id: 3,
-            title: "Task 3",
-            priority: "high"
-          }
-        ]
+        tasks: [],
+        task: {
+          title: '',
+          priority: ''
+        }
       }
     },
     components: {
       TaskComponent
     },
     methods: {
+      store() {
+        console.log(this.task.title);
+      },
       getTasks() {
+        this.tasks = [];
         window.axios.get('/api/tasks').then( ({data}) =>{
           data.forEach(task => {
             this.tasks.push(task)
