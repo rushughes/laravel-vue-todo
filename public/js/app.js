@@ -1952,10 +1952,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
-  data: function data() {},
+  data: function data() {
+    return {
+      tasks: [{
+        id: 1,
+        title: "Task 1",
+        priority: "low"
+      }, {
+        id: 2,
+        title: "Task 2",
+        priority: "medium"
+      }, {
+        id: 3,
+        title: "Task 3",
+        priority: "high"
+      }]
+    };
+  },
   components: {
     TaskComponent: _Task__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -1988,7 +2009,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Task",
-  data: function data() {}
+  data: function data() {},
+  props: ['task']
 });
 
 /***/ }),
@@ -37640,7 +37662,17 @@ var render = function() {
   return _c("table", [
     _vm._m(0),
     _vm._v(" "),
-    _c("tbody", [_c("task-component"), _vm._v(" "), _vm._m(1)], 1)
+    _c(
+      "tbody",
+      [
+        _vm._l(_vm.tasks, function(task) {
+          return _c("task-component", { key: task.id, attrs: { task: task } })
+        }),
+        _vm._v(" "),
+        _vm._m(1)
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -37667,11 +37699,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", [
         _c("select", { attrs: { id: "select" } }, [
-          _c("option", [_vm._v("\n              Low\n            ")]),
+          _c("option", [_vm._v("\n              low\n            ")]),
           _vm._v(" "),
-          _c("option", [_vm._v("\n              Medium\n            ")]),
+          _c("option", [_vm._v("\n              medium\n            ")]),
           _vm._v(" "),
-          _c("option", [_vm._v("\n              High\n            ")])
+          _c("option", [_vm._v("\n              high\n            ")])
         ])
       ]),
       _vm._v(" "),
@@ -37702,19 +37734,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("tr", [
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.task.title) + "\n  ")]),
+    _vm._v(" "),
+    _c("td", [_vm._v("\n    " + _vm._s(_vm.task.priority) + "\n  ")]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", [_vm._v("\n    1\n  ")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("\n    2\n  ")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("\n    3\n  ")])
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]

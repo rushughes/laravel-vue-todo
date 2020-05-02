@@ -14,7 +14,12 @@
       </tr>
     </thead>
     <tbody>
-      <task-component></task-component>
+      <task-component
+      v-for="task in tasks"
+      :key="task.id"
+      :task="task"
+      >
+      </task-component>
       <tr>
         <td>
           <input type="text" id="task" />
@@ -22,13 +27,13 @@
         <td>
           <select id="select">
               <option>
-                Low
+                low
               </option>
               <option>
-                Medium
+                medium
               </option>
               <option>
-                High
+                high
               </option>
           </select>
         </td>
@@ -47,7 +52,25 @@
   export default {
     name: "App",
     data() {
-
+      return {
+        tasks: [
+          {
+            id: 1,
+            title: "Task 1",
+            priority: "low"
+          },
+          {
+            id: 2,
+            title: "Task 2",
+            priority: "medium"
+          },
+          {
+            id: 3,
+            title: "Task 3",
+            priority: "high"
+          }
+        ]
+      }
     },
     components: { TaskComponent }
   }

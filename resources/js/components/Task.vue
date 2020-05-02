@@ -1,13 +1,13 @@
 <template>
   <tr>
     <td>
-      1
+      {{ task.title }}
     </td>
     <td>
-      2
+      {{ task.priority }}
     </td>
     <td>
-      3
+      <button class="btn btn-danger">Delete</button>
     </td>
   </tr>
 </template>
@@ -17,6 +17,7 @@
       name: "Task",
       data() {
 
-      }
+      },
+      props: ['task']
     }
 </script>
