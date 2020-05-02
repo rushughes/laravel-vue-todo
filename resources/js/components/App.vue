@@ -79,7 +79,10 @@
     },
     methods: {
       store() {
-        console.log(this.task.title);
+        window.axios.post('/api/tasks/', this.task).then(({data}) => {
+          console.log(data);
+          this.tasks.push(data);
+        })
       },
       getTasks() {
         this.tasks = [];

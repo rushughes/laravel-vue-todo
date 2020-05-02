@@ -1988,16 +1988,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     store: function store() {
-      console.log(this.task.title);
-    },
-    getTasks: function getTasks() {
       var _this = this;
 
-      this.tasks = [];
-      window.axios.get('/api/tasks').then(function (_ref) {
+      window.axios.post('/api/tasks/', this.task).then(function (_ref) {
         var data = _ref.data;
+        console.log(data);
+
+        _this.tasks.push(data);
+      });
+    },
+    getTasks: function getTasks() {
+      var _this2 = this;
+
+      this.tasks = [];
+      window.axios.get('/api/tasks').then(function (_ref2) {
+        var data = _ref2.data;
         data.forEach(function (task) {
-          _this.tasks.push(task);
+          _this2.tasks.push(task);
         });
       });
     }
