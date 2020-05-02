@@ -86,10 +86,19 @@
         });
       },
       store() {
-        window.axios.post('/api/tasks/', this.task).then(({data}) => {
-          console.log(data);
-          this.tasks.push(data);
-        })
+        if (this.checkInputs()) {
+          window.axios.post('/api/tasks/', this.task).then(({data}) => {
+            console.log(data);
+            this.tasks.push(data);
+          })
+        }
+      },
+      checkInputs() {
+        if (this.task.title && this.task.priority) {
+          return true;
+        } else {
+          return false;
+        }
       },
       getTasks() {
         this.tasks = [];
