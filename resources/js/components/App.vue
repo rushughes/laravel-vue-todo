@@ -72,6 +72,20 @@
         ]
       }
     },
-    components: { TaskComponent }
+    components: {
+      TaskComponent
+    },
+    methods: {
+      getTasks() {
+        window.axios.get('/api/tasks').then( ({data}) =>{
+          data.forEach(task => {
+            this.tasks.push(task)
+          });
+        });
+      }
+    },
+    created() {
+      this.getTasks();
+    }
   }
 </script>

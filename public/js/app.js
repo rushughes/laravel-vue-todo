@@ -1979,6 +1979,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     TaskComponent: _Task__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    getTasks: function getTasks() {
+      var _this = this;
+
+      window.axios.get('/api/tasks').then(function (_ref) {
+        var data = _ref.data;
+        data.forEach(function (task) {
+          _this.tasks.push(task);
+        });
+      });
+    }
+  },
+  created: function created() {
+    this.getTasks();
   }
 });
 
