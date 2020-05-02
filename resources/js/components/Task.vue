@@ -7,7 +7,7 @@
       {{ task.priority }}
     </td>
     <td>
-      <button class="btn btn-danger">Delete</button>
+      <button @click="remove" class="btn btn-danger">Delete</button>
     </td>
   </tr>
 </template>
@@ -18,6 +18,11 @@
       data() {
 
       },
-      props: ['task']
+      props: ['task'],
+      methods: {
+        remove() {
+          this.$emit('delete', this.task.id);
+        }
+      }
     }
 </script>

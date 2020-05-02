@@ -18,6 +18,7 @@
       v-for="task in tasks"
       :key="task.id"
       :task="task"
+      @delete="remove"
       >
       </task-component>
       <tr>
@@ -78,6 +79,9 @@
       TaskComponent
     },
     methods: {
+      remove(id) {
+        console.log(id)
+      },
       store() {
         window.axios.post('/api/tasks/', this.task).then(({data}) => {
           console.log(data);
@@ -88,7 +92,9 @@
         this.tasks = [];
         window.axios.get('/api/tasks').then( ({data}) =>{
           data.forEach(task => {
-            this.tasks.push(task)
+            this.tasks.push(task);
+            this.task.title = '';
+            this.task.priority = '';
           });
         });
       }

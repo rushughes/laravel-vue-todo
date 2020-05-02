@@ -1971,6 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -1987,6 +1988,9 @@ __webpack_require__.r(__webpack_exports__);
     TaskComponent: _Task__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    remove: function remove(id) {
+      console.log(id);
+    },
     store: function store() {
       var _this = this;
 
@@ -2005,6 +2009,9 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref2.data;
         data.forEach(function (task) {
           _this2.tasks.push(task);
+
+          _this2.task.title = '';
+          _this2.task.priority = '';
         });
       });
     }
@@ -2042,7 +2049,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Task",
   data: function data() {},
-  props: ['task']
+  props: ['task'],
+  methods: {
+    remove: function remove() {
+      this.$emit('delete', this.task.id);
+    }
+  }
 });
 
 /***/ }),
@@ -37698,7 +37710,11 @@ var render = function() {
       "tbody",
       [
         _vm._l(_vm.tasks, function(task) {
-          return _c("task-component", { key: task.id, attrs: { task: task } })
+          return _c("task-component", {
+            key: task.id,
+            attrs: { task: task },
+            on: { delete: _vm.remove }
+          })
         }),
         _vm._v(" "),
         _c("tr", [
@@ -37823,19 +37839,16 @@ var render = function() {
     _vm._v(" "),
     _c("td", [_vm._v("\n    " + _vm._s(_vm.task.priority) + "\n  ")]),
     _vm._v(" "),
-    _vm._m(0)
+    _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", on: { click: _vm.remove } },
+        [_vm._v("Delete")]
+      )
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
