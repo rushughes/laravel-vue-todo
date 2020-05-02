@@ -1,9 +1,22 @@
 <template>
-  <h1>Tasks vue</h1>
+  <tr>
+    <td>
+      1
+    </td>
+    <td>
+      2
+    </td>
+    <td>
+      3
+    </td>
+  </tr>
 </template>
 
 <script>
     export default {
-      name: "Task"
+      name: "Task",
+      data() {
+
+      }
     }
 </script>
