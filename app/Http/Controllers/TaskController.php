@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -14,7 +16,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        return "it's working";
     }
 
     /**
@@ -22,9 +24,14 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Faker $faker)
     {
-        //
+        $task = new Task();
+        $task->title = $faker->sentence(1);
+        $task->priority = $faker->boolean ? 'low' : 'high';
+        $task->save();
+
+        return response($task->jsonSerialize(), 201);
     }
 
     /**
