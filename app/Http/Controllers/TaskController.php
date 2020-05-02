@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Faker\Generator as Faker;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -16,7 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return "it's working";
+        return response(Task::all()->jsonSerialize(), 200);
     }
 
     /**
@@ -42,7 +41,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $task = new Task();
+      $task->title = $request->title;
+      $task->priority = $request->priority;
+      $task->save();
+
+      return response($task->jsonSerialize(), 201);
     }
 
     /**
@@ -85,8 +89,9 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        Task::destroy($id);
+        return response(null, 204);
     }
 }
