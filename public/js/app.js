@@ -1989,29 +1989,37 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     remove: function remove(id) {
-      console.log(id);
+      var _this = this;
+
+      window.axios["delete"]("/api/tasks/".concat(id)).then(function () {
+        var index = _this.tasks.findIndex(function (task) {
+          return task.id === id;
+        });
+
+        _this.tasks.splice(index, 1);
+      });
     },
     store: function store() {
-      var _this = this;
+      var _this2 = this;
 
       window.axios.post('/api/tasks/', this.task).then(function (_ref) {
         var data = _ref.data;
         console.log(data);
 
-        _this.tasks.push(data);
+        _this2.tasks.push(data);
       });
     },
     getTasks: function getTasks() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.tasks = [];
       window.axios.get('/api/tasks').then(function (_ref2) {
         var data = _ref2.data;
         data.forEach(function (task) {
-          _this2.tasks.push(task);
+          _this3.tasks.push(task);
 
-          _this2.task.title = '';
-          _this2.task.priority = '';
+          _this3.task.title = '';
+          _this3.task.priority = '';
         });
       });
     }

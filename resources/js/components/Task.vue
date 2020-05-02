@@ -15,7 +15,7 @@
 <script>
     export default {
       name: "Task",
-      data() {
+      data: function () {
 
       },
       props: ['task'],

@@ -66,7 +66,7 @@
 
   export default {
     name: "App",
-    data() {
+    data: function () {
       return {
         tasks: [],
         task: {
@@ -80,7 +80,10 @@
     },
     methods: {
       remove(id) {
-        console.log(id)
+        window.axios.delete(`/api/tasks/${id}`).then(()=>{
+          let index = this.tasks.findIndex(task => task.id === id);
+          this.tasks.splice(index,1);
+        });
       },
       store() {
         window.axios.post('/api/tasks/', this.task).then(({data}) => {
