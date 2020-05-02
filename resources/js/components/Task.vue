@@ -15,9 +15,6 @@
 <script>
     export default {
       name: "Task",
-      data: function () {
-
-      },
       props: ['task'],
       methods: {
         remove() {
